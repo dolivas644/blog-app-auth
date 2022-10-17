@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
+import avatar from "./avatar.css"
 
 export default function Avatar({ url, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null)
@@ -66,7 +67,7 @@ export default function Avatar({ url, size, onUpload }) {
       ) : (
         <>
           <label className="button primary block" htmlFor="single">
-            Upload an avatar
+            Click to Upload Avatar
           </label>
           <div className="visually-hidden">
             <input

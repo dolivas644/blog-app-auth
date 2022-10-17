@@ -1,0 +1,9 @@
+img, svg {
+    vertical-align: middle;
+    border-radius: 50%;
+}
+.visually-hidden{
+    background-color: pink;
+    color: azure;
+    visibility: visible !important;
+}

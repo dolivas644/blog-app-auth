@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Avatar from './Avatar'
+import Dashboard from './components/Dashboard'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navigationbar from './components/Nav/Nav'
+import account from "./account.css"
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
@@ -70,8 +74,9 @@ const Account = ({ session }) => {
       {loading ? (
         'Saving ...'
       ) : (
-        
+
         <form onSubmit={updateProfile} className="form-widget">
+
           <div>Email: {session.user.email}</div>
           <div>
             <label htmlFor="username">Name</label>
@@ -96,27 +101,29 @@ const Account = ({ session }) => {
               Update profile
             </button>
           </div>
+          <div className="form-widget">
+            {/* Add to the body */}
+            <Avatar
+              url={avatar_url}
+              size={150}
+              onUpload={(url) => {
+                setAvatarUrl(url)
+                updateProfile({ username, website, avatar_url: url })
+              }}
+            />
+            {/* ... */}
+          </div>
+          <button
+            type="button"
+            className="button block"
+            onClick={() => supabase.auth.signOut()}
+          >
+            Sign Out
+          </button>
         </form>
       )}
-      <button
-        type="button"
-        className="button block"
-        onClick={() => supabase.auth.signOut()}
-      >
-        Sign Out
-      </button>
-      <div className="form-widget">
-    {/* Add to the body */}
-    <Avatar
-      url={avatar_url}
-      size={150}
-      onUpload={(url) => {
-        setAvatarUrl(url)
-        updateProfile({ username, website, avatar_url: url })
-      }}
-    />
-    {/* ... */}
-  </div>
+
+
     </div>
   )
 }
